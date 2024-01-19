@@ -8,6 +8,7 @@ public class Options : MonoBehaviour
     public AudioSource click;
     public GameObject panel;
     public GameObject titulo;
+    public GameObject botones;
 
     // Start is called before the first frame update
     private void OnMouseOver()
@@ -33,6 +34,7 @@ public class Options : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         panel.SetActive (true);
         titulo.SetActive(false);
+        botones.SetActive(false);
 
     }
 }

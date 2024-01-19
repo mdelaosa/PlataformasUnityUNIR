@@ -14,14 +14,41 @@ public class PlayerController : MonoBehaviour
     public float impulso2;
     bool Salto2 = false;
     int cuenta_saltos = 0;
+    public AudioSource jump;
     bool tocando_suelo = false;
 
-    //public AudioSource jump;
+    public static int contador_vidas = 3;
+    public GameObject heart1;
+    public GameObject heart2;
+    public GameObject heart3;
+    public AudioSource GameOver;
+    public AudioSource hit;
+    public float impulsoUP;
+    public float impulsoLEFT;
+
+    //Para volver visible el HUD de vidas solo una vez
+    public static int CreadordeVidas = 0;
+    public GameObject CanvasVidas;
+
+    //Para iniciar la música de gameplay
+    public static int InicioMusica = 0;
+    public GameObject Musica;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ++CreadordeVidas;
+        if (CreadordeVidas == 1)
+        {
+            CanvasVidas.SetActive(true);
+        }
+
+        ++InicioMusica;
+        if (InicioMusica == 1)
+        {
+            Musica.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -53,7 +80,7 @@ public class PlayerController : MonoBehaviour
             rb2d.AddForce(Vector2.up * impulso, ForceMode2D.Impulse);
             tocando_suelo = false;
             anim.SetBool("Grounded", false);
-            //jump.PlayOneShot(jump.clip);
+            jump.PlayOneShot(jump.clip);
             StartCoroutine(EsperaSalto());
         }
         //salto 2
@@ -62,7 +89,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Doble", true);
             ++cuenta_saltos;
             rb2d.AddForce(Vector2.up * impulso2, ForceMode2D.Impulse);
-            //jump.PlayOneShot(jump.clip);
+            jump.PlayOneShot(jump.clip);
         }
     }
 
@@ -78,8 +105,40 @@ public class PlayerController : MonoBehaviour
             cuenta_saltos = 0;
             Salto2 = false;
         }
-    }
+        //Quitar vidas cuando es dañado
+        if (collision.gameObject.tag == "Enemy")
+        {
+            --contador_vidas;
+            hit.PlayOneShot(hit.clip);
+            rb2d.AddForce(Vector2.up * impulsoUP, ForceMode2D.Impulse);
+            rb2d.AddForce(Vector2.left * impulsoLEFT, ForceMode2D.Impulse);
+            anim.SetBool("Dañado", true);
+        }
 
+        //Cambio de vidas en HUD
+        switch (contador_vidas)
+        {
+            case 2:
+                heart3.SetActive(false);
+                Debug.Log("Quedan 2 vidas");
+                break;
+
+            case 1:
+                heart2.SetActive(false);
+                Debug.Log("Queda 1 vida");
+                break;
+
+            case 0:
+                rb2d.bodyType = RigidbodyType2D.Static;
+                heart1.SetActive(false);
+                Debug.Log("Muerto");
+                Musica.SetActive(false);
+               GameOver.PlayOneShot(GameOver.clip);
+                break;
+            default:
+            break;
+        }
+    }
         //Coorutina para activar el segundo salto
         IEnumerator EsperaSalto()
     {

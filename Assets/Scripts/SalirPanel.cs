@@ -8,6 +8,7 @@ public class SalirPanel : MonoBehaviour
     public AudioSource click;
     public GameObject panel;
     public GameObject titulo;
+    public GameObject botones;
     public GameObject mute;
 
     // Start is called before the first frame update
@@ -34,6 +35,7 @@ public class SalirPanel : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         panel.SetActive(false);
         titulo.SetActive(true);
+        botones.SetActive(true);
         mute.SetActive(false);
     }
 

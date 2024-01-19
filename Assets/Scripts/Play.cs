@@ -13,6 +13,9 @@ public class Play : MonoBehaviour
     private void Start()
     {
         NivelAleatorio = Random.Range(1, 2);
+        PlayerController.contador_vidas = 3;
+        PlayerController.CreadordeVidas = 0;
+        PlayerController.InicioMusica = 0;
     }
 
 
