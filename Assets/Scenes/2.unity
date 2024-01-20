@@ -3131,13 +3131,13 @@ MonoBehaviour:
   impulso2: 12
   jump: {fileID: 621199338}
   heart1: {fileID: 415449839}
-  heart2: {fileID: 1857208133}
-  heart3: {fileID: 1437468433}
+  heart2: {fileID: 718537408}
+  heart3: {fileID: 2114500084}
   GameOver: {fileID: 621199340}
   hit: {fileID: 621199339}
   impulsoUP: 8
   impulsoLEFT: 10
-  CanvasVidas: {fileID: 950817521}
+  CanvasVidas: {fileID: 1309701648}
   Musica: {fileID: 417683461}
 --- !u!50 &621199343
 Rigidbody2D:
@@ -3705,11 +3705,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &950817521 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1639011821191158353, guid: 950e414df18691b479041fe11a040f86, type: 3}
-  m_PrefabInstance: {fileID: 717374657}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1134527824
 GameObject:
   m_ObjectHideFlags: 0
