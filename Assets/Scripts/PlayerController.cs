@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     int cuenta_saltos = 0;
     public AudioSource jump;
     bool tocando_suelo = false;
+    public string SceneName;
 
     public static int contador_vidas = 3;
     public GameObject heart1;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public GameObject heart3;
     public AudioSource GameOver;
     public AudioSource hit;
+    public AudioSource Sandia;
     public float impulsoUP;
     public float impulsoLEFT;
 
@@ -105,6 +107,15 @@ public class PlayerController : MonoBehaviour
             cuenta_saltos = 0;
             Salto2 = false;
         }
+
+        //Sandias
+        if (collision.gameObject.tag == "Coin")
+        {
+            // Destruir Gameobject
+            ++Sandias.sandias;
+            Sandia.PlayOneShot(Sandia.clip);
+        }
+
         //Quitar vidas cuando es dañado
         if (collision.gameObject.tag == "Enemy")
         {
@@ -133,7 +144,9 @@ public class PlayerController : MonoBehaviour
                 heart1.SetActive(false);
                 Debug.Log("Muerto");
                 Musica.SetActive(false);
+                CanvasVidas.SetActive(false);
                GameOver.PlayOneShot(GameOver.clip);
+                SceneManager.LoadScene(SceneName);
                 break;
             default:
             break;
