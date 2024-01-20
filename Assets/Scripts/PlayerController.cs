@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource GameOver;
     public AudioSource hit;
     public AudioSource Sandia;
+    public AudioSource Bandera;
     public float impulsoUP;
     public float impulsoLEFT;
 
@@ -35,6 +36,9 @@ public class PlayerController : MonoBehaviour
     //Para iniciar la música de gameplay
     public static int InicioMusica = 0;
     public GameObject Musica;
+
+    //Contador de niveles
+    public static int CuentaNiveles = 0;
 
 
     // Start is called before the first frame update
@@ -152,10 +156,30 @@ public class PlayerController : MonoBehaviour
             break;
         }
     }
-        //Coorutina para activar el segundo salto
-        IEnumerator EsperaSalto()
+
+    //Final de nivel
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bandera")
+        {
+            Bandera.PlayOneShot(Bandera.clip);
+            StartCoroutine(EsperaFinal());
+        }
+    }
+
+    //Coorutina para activar el segundo salto
+    IEnumerator EsperaSalto()
     {
         yield return new WaitForSeconds(0.1f);
         Salto2 = true;
+    }
+
+    //Coorutina para activar el siguiente nivel
+    IEnumerator EsperaFinal()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ++CuentaNiveles;
+        Debug.Log(CuentaNiveles);
+        SceneManager.LoadScene(Play.NivelAleatorio);
     }
 }

@@ -7,9 +7,10 @@ public class Play : MonoBehaviour
 {
 
     public Animator anim;
-    public int NivelAleatorio;
+    public static int NivelAleatorio;
     public AudioSource click;
 
+    //Elegir nivel aleatorio dependiendo de los niveles pasados
     private void Start()
     {
         NivelAleatorio = Random.Range(1, 2);
