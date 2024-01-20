@@ -1859,7 +1859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3c5125505fedd4fa308e43af7f029c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 259194296}
+  slider: {fileID: 0}
   SliderValue: 1
   mute: {fileID: 1380996553}
 --- !u!1 &1320695377
@@ -3474,7 +3474,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 61bf269b2629b4d47b5d3cebec401902, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
