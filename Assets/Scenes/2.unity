@@ -330,7 +330,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d50eb5dddbb63024c972e3ee3ae7de75, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -443,11 +443,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.01
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.53
+      value: -4.55
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3292,11 +3292,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.04
+      value: 10.03
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.53
+      value: -4.55
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3908,11 +3908,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.98
+      value: 5.03
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.53
+      value: -4.55
       objectReference: {fileID: 0}
     - target: {fileID: 9005914625804588706, guid: 950e414df18691b479041fe11a040f86, type: 3}
       propertyPath: m_LocalPosition.z
