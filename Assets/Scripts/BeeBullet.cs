@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemiesProjectile : MonoBehaviour
 {
-    public float speed = 5;
+    public float beeTimer;
+    public GameObject beeBullet;
+    public Transform beeBulletPos;
 
     void Start()
     {
@@ -13,7 +15,18 @@ public class EnemiesProjectile : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector2.down * speed * Time.deltaTime);
+        beeTimer += Time.deltaTime;
+
+        if(beeTimer > 2)
+        {
+            beeTimer = 0;
+            beeShoot();
+        }
+    }
+
+    void beeShoot()
+    {
+        Instantiate(beeBullet, beeBulletPos.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
