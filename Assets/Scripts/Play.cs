@@ -10,13 +10,17 @@ public class Play : MonoBehaviour
     public static int NivelAleatorio;
     public AudioSource click;
 
+    //Para volver visible el HUD de vidas solo una vez
+    //public static int CreadordeVidas = 0;
+
     //Elegir nivel aleatorio dependiendo de los niveles pasados
     private void Start()
     {
         NivelAleatorio = Random.Range(1, 2);
         PlayerController.contador_vidas = 3;
-        PlayerController.CreadordeVidas = 0;
+        //CreadordeVidas = 0;
         PlayerController.InicioMusica = 0;
+        //++CreadordeVidas;
     }
 
 
