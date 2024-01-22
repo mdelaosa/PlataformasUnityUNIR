@@ -9,6 +9,8 @@ public class Play : MonoBehaviour
     public Animator anim;
     public static int NivelAleatorio;
     public AudioSource click;
+    int highscore;
+
 
     //Para volver visible el HUD de vidas solo una vez
     //public static int CreadordeVidas = 0;
@@ -34,6 +36,7 @@ public class Play : MonoBehaviour
         {
             click.PlayOneShot(click.clip);
             anim.SetBool("Pulsado", true);
+            Sandias.sandias = 0;
             StartCoroutine(EsperaCambio());
         }
     }
