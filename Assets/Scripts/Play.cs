@@ -23,6 +23,7 @@ public class Play : MonoBehaviour
         //CreadordeVidas = 0;
         PlayerController.InicioMusica = 0;
         //++CreadordeVidas;
+        Destroyer.destruir = false;
     }
 
 
