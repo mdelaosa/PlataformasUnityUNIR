@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class Timer : MonoBehaviour
+public class TimerOver : MonoBehaviour
 {
     public TextMeshProUGUI tiempoText;
     public string SceneName;
@@ -12,9 +12,6 @@ public class Timer : MonoBehaviour
     private bool en_marcha;
     public static float restante;
     [SerializeField] int min, seg;
-    public GameObject Musica;
-    public GameObject CanvasVidas;
-    public GameObject cortinaMuerte;
 
     void Awake()
     {
@@ -22,11 +19,11 @@ public class Timer : MonoBehaviour
         //tiempo = 10f;
         en_marcha = true;
     }
-    
-     void Update()
+
+    void Update()
     {
         tiempo -= Time.deltaTime;
-        tiempoText.text = "" + tiempo.ToString("f0"); 
+        tiempoText.text = "" + tiempo.ToString("f0");
 
         if (en_marcha)
         {
@@ -35,9 +32,6 @@ public class Timer : MonoBehaviour
             if (restante <= 0)
             {
                 en_marcha = false;
-                Musica.SetActive(false);
-                CanvasVidas.SetActive(false);
-                cortinaMuerte.SetActive(true);
                 StartCoroutine(EsperaCortina());
             }
         }
@@ -46,10 +40,8 @@ public class Timer : MonoBehaviour
 
     IEnumerator EsperaCortina()
     {
-        yield return new WaitForSeconds(0.49f);
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(0f);
         SceneManager.LoadScene(SceneName);
     }
-
-
 }
+
