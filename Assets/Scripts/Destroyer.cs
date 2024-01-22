@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destroy : MonoBehaviour
+public class Destroyer : MonoBehaviour
 {
     public static bool destruir = false;
     private void Awake()
@@ -12,7 +12,11 @@ public class Destroy : MonoBehaviour
     private void Update()
     {
 
-
+        if (destruir == true)
+        {
+            Debug.Log("Destruido");
+            Destroy(gameObject);
+        }
     }
 
 }
