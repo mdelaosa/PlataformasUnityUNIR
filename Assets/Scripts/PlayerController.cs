@@ -37,13 +37,13 @@ public class PlayerController : MonoBehaviour
     public float impulsoUP;
     public float impulsoLEFT;
 
-    //Para volver visible el HUD de vidas solo una vez
-    public static int CreadordeVidas = 0;
-    public GameObject CanvasVidas;
-
     //Para iniciar la música de gameplay
     public static int InicioMusica = 0;
     public GameObject Musica;
+
+    public static bool desaparecer = false;
+    public GameObject CanvasVidas;
+    public static int cuentaHUD = 0;
 
     //Contador de niveles
     public static int CuentaNiveles = 0;
@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ++CreadordeVidas;
-        if (CreadordeVidas == 1)
+        ++cuentaHUD;
+        if (cuentaHUD == 1)
         {
             CanvasVidas.SetActive(true);
         }
@@ -175,8 +175,9 @@ public class PlayerController : MonoBehaviour
                 heart1.SetActive(false);
                 Debug.Log("Muerto");
                 Musica.SetActive(false);
-                CanvasVidas.SetActive(false);
-               GameOver.PlayOneShot(GameOver.clip);
+                desaparecer = true;
+                cuentaHUD = 0;
+                GameOver.PlayOneShot(GameOver.clip);
                 SceneManager.LoadScene(SceneName);
                 break;
             default:
@@ -190,6 +191,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Bandera")
         {
             Bandera.PlayOneShot(Bandera.clip);
+            Play.NivelAleatorio = Random.Range(1, 2);
             StartCoroutine(EsperaFinal());
         }
     }
