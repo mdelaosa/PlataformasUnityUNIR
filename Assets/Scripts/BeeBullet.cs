@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesProjectile : MonoBehaviour
+public class BeeBullet : MonoBehaviour
 {
     public float beeTimer;
     public GameObject beeBullet;
@@ -29,9 +29,9 @@ public class EnemiesProjectile : MonoBehaviour
         Instantiate(beeBullet, beeBulletPos.position, Quaternion.identity);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Suelo") || (collision.gameObject.tag == "Enemy"))
+        if (collision.gameObject.tag == "Suelo")
         {
             Destroy(gameObject);
         }
