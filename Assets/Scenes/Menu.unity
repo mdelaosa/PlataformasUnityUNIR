@@ -860,8 +860,8 @@ GameObject:
   - component: {fileID: 758610062}
   - component: {fileID: 758610064}
   - component: {fileID: 758610065}
-  - component: {fileID: 758610066}
   - component: {fileID: 758610067}
+  - component: {fileID: 758610066}
   m_Layer: 0
   m_Name: Play
   m_TagString: Untagged
@@ -1110,9 +1110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd273352f0d2e4d499366716dd93603c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  click: {fileID: 0}
-  CanvasVidas: {fileID: 0}
+  anim: {fileID: 758610065}
+  click: {fileID: 758610066}
 --- !u!1 &838480048
 GameObject:
   m_ObjectHideFlags: 0
