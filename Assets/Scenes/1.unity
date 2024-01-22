@@ -307,9 +307,9 @@ MonoBehaviour:
   impulso2: 12
   jump: {fileID: 224372761}
   SceneName: GameOver
-  heart1: {fileID: 0}
-  heart2: {fileID: 0}
-  heart3: {fileID: 0}
+  heart1: {fileID: 1695652200}
+  heart2: {fileID: 2028961417}
+  heart3: {fileID: 1270073208}
   GameOver: {fileID: 224372760}
   hit: {fileID: 224372759}
   Sandia: {fileID: 224372762}
@@ -317,6 +317,7 @@ MonoBehaviour:
   impulsoUP: 14
   impulsoLEFT: 10
   Musica: {fileID: 1016932981}
+  CanvasVidas: {fileID: 1058119640}
 --- !u!95 &224372758
 Animator:
   serializedVersion: 5
@@ -5043,7 +5044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b5b2d6b66e04f4eb7ba7a4de8e03c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUD: {fileID: 0}
 --- !u!1 &1058119640
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,7 +5116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b5b2d6b66e04f4eb7ba7a4de8e03c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUD: {fileID: 1058119640}
 --- !u!223 &1058119644
 Canvas:
   m_ObjectHideFlags: 0

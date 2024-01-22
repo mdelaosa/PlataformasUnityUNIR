@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-    public GameObject HUD;
 
     private void Awake()
     {
@@ -12,10 +11,7 @@ public class Destroy : MonoBehaviour
     }
     private void Update()
     {
-        if (Play.desaparecer == true)
-        {
-            HUD.SetActive(false);
-        }
+
     }
 
 }
