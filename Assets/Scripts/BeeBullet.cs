@@ -31,7 +31,7 @@ public class EnemiesProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Suelo")
+        if (collision.gameObject.tag == "Suelo" || collision.gameObject.tag == "Enemy")
         {
             Destroy(gameObject);
         }
