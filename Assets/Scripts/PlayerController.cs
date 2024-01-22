@@ -18,12 +18,10 @@ public class PlayerController : MonoBehaviour
     bool tocando_suelo = false;
     public string SceneName;
 
-    //Saltos en pared
-    public LayerMask paredLayer;
-    public Transform checkPared;
-    bool tocar_Pared;
-    bool deslizarse_Pared = false;
-    public float velocidad_deslizarse = 2f;
+    public GameObject cortinaInicio;
+    public GameObject cortinaMuerte;
+    public GameObject cortinaFinal;
+    public GameObject timer;
 
     public static int contador_vidas = 3;
     public GameObject heart1;
@@ -47,15 +45,15 @@ public class PlayerController : MonoBehaviour
     //Contador de niveles
     public static int CuentaNiveles = 0;
 
+    private void Awake()
+    {
+        desaparecer = false;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        ++cuentaHUD;
-        if (cuentaHUD == 1)
-        {
-            CanvasVidas.SetActive(true);
-        }
+        StartCoroutine(EsperaCortina());
 
         ++InicioMusica;
         if (InicioMusica == 1)
@@ -105,16 +103,11 @@ public class PlayerController : MonoBehaviour
             jump.PlayOneShot(jump.clip);
         }
 
-        //Pared
-        
-        if (tocar_Pared == true)
+        //Comprobación HUD
+
+        if (desaparecer == true)
         {
-            deslizarse_Pared = true;
-            rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Clamp(rb2d.velocity.y, -velocidad_deslizarse, float.MaxValue));
-        }
-        else
-        {
-            deslizarse_Pared = false;
+            CanvasVidas.SetActive(false);
         }
     }
 
@@ -129,13 +122,6 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Doble", false);
             cuenta_saltos = 0;
             Salto2 = false;
-        }
-
-        //Pared
-        if (collision.gameObject.tag == "Wall")
-        {
-            tocar_Pared = true;
-            tocar_Pared = Physics2D.OverlapBox(checkPared.position, new Vector2(.18f, 1.45f), paredLayer);
         }
 
         //Sandias
@@ -166,18 +152,20 @@ public class PlayerController : MonoBehaviour
 
             case 1:
                 heart2.SetActive(false);
+                heart3.SetActive(false);
                 Debug.Log("Queda 1 vida");
                 break;
 
             case 0:
-                rb2d.bodyType = RigidbodyType2D.Static;
                 heart1.SetActive(false);
                 Debug.Log("Muerto");
                 Musica.SetActive(false);
-                desaparecer = true;
                 cuentaHUD = 0;
                 GameOver.PlayOneShot(GameOver.clip);
-                SceneManager.LoadScene(SceneName);
+                cortinaMuerte.SetActive(true);
+                cortinaMuerte.SetActive(true);
+                StartCoroutine(EsperaCortina());
+                StartCoroutine(EsperaMuerte());
                 break;
             default:
             break;
@@ -191,7 +179,10 @@ public class PlayerController : MonoBehaviour
         {
             Bandera.PlayOneShot(Bandera.clip);
             Play.NivelAleatorio = Random.Range(1, 2);
-            StartCoroutine(EsperaFinal());
+            cortinaFinal.SetActive(true);
+            timer.SetActive(false);
+            Destroy(CanvasVidas);
+            StartCoroutine(EsperaCortinaFinal());
         }
     }
 
@@ -205,9 +196,31 @@ public class PlayerController : MonoBehaviour
     //Coorutina para activar el siguiente nivel
     IEnumerator EsperaFinal()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0f);
         ++CuentaNiveles;
         Debug.Log(CuentaNiveles);
         SceneManager.LoadScene(Play.NivelAleatorio);
     }
+    IEnumerator EsperaMuerte()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(CanvasVidas);
+        SceneManager.LoadScene(SceneName);
+
+    }
+
+    IEnumerator EsperaCortina()
+    {
+        yield return new WaitForSeconds(0.5f);
+        cortinaInicio.SetActive(false);
+        timer.SetActive(true);
+        CanvasVidas.SetActive(true);
+    }
+
+    IEnumerator EsperaCortinaFinal()
+    {
+        yield return new WaitForSeconds(0.49f);
+        StartCoroutine(EsperaFinal());
+    }
 }
+
