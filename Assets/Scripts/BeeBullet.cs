@@ -17,7 +17,7 @@ public class EnemiesProjectile : MonoBehaviour
     {
         beeTimer += Time.deltaTime;
 
-        if(beeTimer > 2)
+        if(beeTimer > 5)
         {
             beeTimer = 0;
             beeShoot();
@@ -31,7 +31,7 @@ public class EnemiesProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Suelo" || collision.gameObject.tag == "Enemy")
+        if ((collision.gameObject.tag == "Suelo") || (collision.gameObject.tag == "Enemy"))
         {
             Destroy(gameObject);
         }

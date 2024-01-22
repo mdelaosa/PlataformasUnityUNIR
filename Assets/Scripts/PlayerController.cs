@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,13 @@ public class PlayerController : MonoBehaviour
     public AudioSource jump;
     bool tocando_suelo = false;
     public string SceneName;
+
+    //Saltos en pared
+    public LayerMask paredLayer;
+    public Transform checkPared;
+    bool tocar_Pared;
+    bool deslizarse_Pared = false;
+    public float velocidad_deslizarse = 2f;
 
     public static int contador_vidas = 3;
     public GameObject heart1;
@@ -97,6 +105,18 @@ public class PlayerController : MonoBehaviour
             rb2d.AddForce(Vector2.up * impulso2, ForceMode2D.Impulse);
             jump.PlayOneShot(jump.clip);
         }
+
+        //Pared
+        
+        if (tocar_Pared == true)
+        {
+            deslizarse_Pared = true;
+            rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Clamp(rb2d.velocity.y, -velocidad_deslizarse, float.MaxValue));
+        }
+        else
+        {
+            deslizarse_Pared = false;
+        }
     }
 
     //Detección de colisiones
@@ -110,6 +130,13 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Doble", false);
             cuenta_saltos = 0;
             Salto2 = false;
+        }
+
+        //Pared
+        if (collision.gameObject.tag == "Wall")
+        {
+            tocar_Pared = true;
+            tocar_Pared = Physics2D.OverlapBox(checkPared.position, new Vector2(.18f, 1.45f), paredLayer);
         }
 
         //Sandias
