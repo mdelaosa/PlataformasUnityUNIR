@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     [SerializeField] int min, seg;
     public GameObject Musica;
     public GameObject CanvasVidas;
+    public GameObject cortinaMuerte;
 
     void Awake()
     {
@@ -36,11 +37,19 @@ public class Timer : MonoBehaviour
                 en_marcha = false;
                 Musica.SetActive(false);
                 CanvasVidas.SetActive(false);
-                SceneManager.LoadScene(SceneName);
+                cortinaMuerte.SetActive(true);
+                StartCoroutine(EsperaCortina());
             }
         }
 
     }
-  
+
+    IEnumerator EsperaCortina()
+    {
+        yield return new WaitForSeconds(0.49f);
+        gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneName);
+    }
+
 
 }

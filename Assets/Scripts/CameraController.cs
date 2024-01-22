@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     Vector3 desface;
     public float suavizado;
 
+
     private void Start()
     {
         //desfase

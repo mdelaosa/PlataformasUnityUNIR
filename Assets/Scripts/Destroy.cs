@@ -12,6 +12,7 @@ public class Destroy : MonoBehaviour
     private void Update()
     {
 
+
     }
 
 }
