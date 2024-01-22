@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     bool tocando_suelo = false;
     public string SceneName;
 
+    public GameObject cortinaInicio;
+    public GameObject cortinaMuerte;
+    public GameObject cortinaFinal;
+    public GameObject timer;
+
     public static int contador_vidas = 3;
     public GameObject heart1;
     public GameObject heart2;
@@ -40,15 +45,15 @@ public class PlayerController : MonoBehaviour
     //Contador de niveles
     public static int CuentaNiveles = 0;
 
+    private void Awake()
+    {
+        desaparecer = false;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        ++cuentaHUD;
-        if (cuentaHUD == 1)
-        {
-            CanvasVidas.SetActive(true);
-        }
+        StartCoroutine(EsperaCortina());
 
         ++InicioMusica;
         if (InicioMusica == 1)
@@ -97,6 +102,13 @@ public class PlayerController : MonoBehaviour
             rb2d.AddForce(Vector2.up * impulso2, ForceMode2D.Impulse);
             jump.PlayOneShot(jump.clip);
         }
+
+        //Comprobación HUD
+
+        if (desaparecer == true)
+        {
+            CanvasVidas.SetActive(false);
+        }
     }
 
     //Detección de colisiones
@@ -140,18 +152,20 @@ public class PlayerController : MonoBehaviour
 
             case 1:
                 heart2.SetActive(false);
+                heart3.SetActive(false);
                 Debug.Log("Queda 1 vida");
                 break;
 
             case 0:
-                rb2d.bodyType = RigidbodyType2D.Static;
                 heart1.SetActive(false);
                 Debug.Log("Muerto");
                 Musica.SetActive(false);
-                desaparecer = true;
                 cuentaHUD = 0;
                 GameOver.PlayOneShot(GameOver.clip);
-                SceneManager.LoadScene(SceneName);
+                cortinaMuerte.SetActive(true);
+                cortinaMuerte.SetActive(true);
+                StartCoroutine(EsperaCortina());
+                StartCoroutine(EsperaMuerte());
                 break;
             default:
             break;
@@ -165,7 +179,10 @@ public class PlayerController : MonoBehaviour
         {
             Bandera.PlayOneShot(Bandera.clip);
             Play.NivelAleatorio = Random.Range(1, 2);
-            StartCoroutine(EsperaFinal());
+            cortinaFinal.SetActive(true);
+            timer.SetActive(false);
+            Destroy(CanvasVidas);
+            StartCoroutine(EsperaCortinaFinal());
         }
     }
 
@@ -179,9 +196,31 @@ public class PlayerController : MonoBehaviour
     //Coorutina para activar el siguiente nivel
     IEnumerator EsperaFinal()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0f);
         ++CuentaNiveles;
         Debug.Log(CuentaNiveles);
         SceneManager.LoadScene(Play.NivelAleatorio);
     }
+    IEnumerator EsperaMuerte()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(CanvasVidas);
+        SceneManager.LoadScene(SceneName);
+
+    }
+
+    IEnumerator EsperaCortina()
+    {
+        yield return new WaitForSeconds(0.5f);
+        cortinaInicio.SetActive(false);
+        timer.SetActive(true);
+        CanvasVidas.SetActive(true);
+    }
+
+    IEnumerator EsperaCortinaFinal()
+    {
+        yield return new WaitForSeconds(0.49f);
+        StartCoroutine(EsperaFinal());
+    }
 }
+
