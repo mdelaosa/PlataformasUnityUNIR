@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Muerto");
                 Musica.SetActive(false);
                 cuentaHUD = 0;
-                GameOver.PlayOneShot(GameOver.clip);
+                //GameOver.PlayOneShot(GameOver.clip);
                 cortinaMuerte.SetActive(true);
                 cortinaMuerte.SetActive(true);
                 StartCoroutine(EsperaCortina());

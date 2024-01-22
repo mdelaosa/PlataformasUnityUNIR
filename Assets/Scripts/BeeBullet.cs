@@ -9,38 +9,26 @@ public class BeeBullet : MonoBehaviour
     public GameObject beeBullet;
     public Transform beeBulletPos;
 
+    // Start is called before the first frame update
     void Start()
     {
 
     }
 
+    // Update is called once per frame
     void Update()
     {
         beeTimer += Time.deltaTime;
 
-        if(beeTimer > 5)
+        if (beeTimer > 1)
         {
             beeTimer = 0;
             beeShoot();
         }
     }
-
     void beeShoot()
     {
         Instantiate(beeBullet, beeBulletPos.position, Quaternion.identity);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Suelo")
-        {
-            Destroy(gameObject);
-        }
-
-    }
-
-    internal void Setup(object direction)
-    {
-        throw new NotImplementedException();
-    }
 }
