@@ -10,6 +10,7 @@ public class Play : MonoBehaviour
     public static int NivelAleatorio;
     public AudioSource click;
     int highscore;
+    public GameObject contador;
 
 
     //Para volver visible el HUD de vidas solo una vez
@@ -52,6 +53,7 @@ public class Play : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         anim.SetBool("Pulsado", false);
         yield return new WaitForSeconds(0.25f);
+        contador.SetActive(true);
         SceneManager.LoadScene(NivelAleatorio);
     }
 

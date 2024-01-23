@@ -41,6 +41,7 @@ public class TimerOver : MonoBehaviour
     IEnumerator EsperaCortina()
     {
         yield return new WaitForSeconds(0f);
+        Contador.tiempo = 0;
         SceneManager.LoadScene(SceneName);
     }
 }
