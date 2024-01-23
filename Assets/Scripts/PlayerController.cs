@@ -211,6 +211,7 @@ public class PlayerController : MonoBehaviour
                 //GameOver.PlayOneShot(GameOver.clip);
                 cortinaMuerte.SetActive(true);
                 cortinaMuerte.SetActive(true);
+                Contador.en_marcha = false;
                 StartCoroutine(EsperaCortina());
                 StartCoroutine(EsperaMuerte());
                 break;

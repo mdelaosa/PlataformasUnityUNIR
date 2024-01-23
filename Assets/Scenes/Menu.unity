@@ -1428,6 +1428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 758610065}
   click: {fileID: 758610066}
+  contador: {fileID: 966995727}
 --- !u!1 &805575354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,6 +1842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 966995728}
+  - component: {fileID: 966995729}
   m_Layer: 0
   m_Name: Contador
   m_TagString: Untagged
@@ -1863,6 +1865,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &966995729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966995727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afe57f66b5117d45bb38ee3f087eec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min: 0
+  seg: 0
 --- !u!1 &980490679
 GameObject:
   m_ObjectHideFlags: 0

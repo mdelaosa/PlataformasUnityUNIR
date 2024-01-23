@@ -11,6 +11,7 @@ public class Play : MonoBehaviour
     public AudioSource click;
     int highscore;
     public GameObject contador;
+    public static int creadorcontador = 0;
 
 
     //Para volver visible el HUD de vidas solo una vez
@@ -25,6 +26,7 @@ public class Play : MonoBehaviour
         PlayerController.InicioMusica = 0;
         //++CreadordeVidas;
         Destroyer.destruir = false;
+        ++creadorcontador;
     }
 
 
@@ -53,7 +55,12 @@ public class Play : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         anim.SetBool("Pulsado", false);
         yield return new WaitForSeconds(0.25f);
-        contador.SetActive(true);
+
+        if (creadorcontador <= 1)
+        {
+            contador.SetActive(true);
+        }
+        Contador.en_marcha = true;
         SceneManager.LoadScene(NivelAleatorio);
     }
 

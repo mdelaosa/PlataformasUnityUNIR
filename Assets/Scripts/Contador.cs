@@ -11,6 +11,7 @@ public class Contador : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         inicio = (min * 60) + seg;
         //tiempo = 10f;
         en_marcha = true;
@@ -26,7 +27,6 @@ public class Contador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (en_marcha == true)
         {
             tiempo += Time.deltaTime;
