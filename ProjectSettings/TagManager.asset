@@ -11,6 +11,7 @@ TagManager:
   - Bandera
   - IPared
   - DPared
+  - GameOver
   layers:
   - Default
   - TransparentFX

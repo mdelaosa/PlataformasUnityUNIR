@@ -177,6 +177,26 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Dañado", true);
         }
 
+        //Saw - Game Over
+        if (collision.gameObject.tag == "GameOver")
+        {
+            hit.PlayOneShot(hit.clip);
+            rb2d.AddForce(Vector2.up * impulsoUP, ForceMode2D.Impulse);
+            rb2d.AddForce(Vector2.left * impulsoLEFT, ForceMode2D.Impulse);
+            anim.SetBool("Dañado", true);
+            heart3.SetActive(false);
+            heart2.SetActive(false);
+            heart1.SetActive(false);
+            Debug.Log("Muerto");
+            Musica.SetActive(false);
+            cuentaHUD = 0;
+            cortinaMuerte.SetActive(true);
+            cortinaMuerte.SetActive(true);
+            Contador.en_marcha = false;
+            StartCoroutine(EsperaCortina());
+            StartCoroutine(EsperaMuerte());
+        }
+
         //Cambio de vidas en HUD
         switch (contador_vidas)
         {
