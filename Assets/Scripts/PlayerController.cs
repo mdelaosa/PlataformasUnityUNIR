@@ -18,6 +18,16 @@ public class PlayerController : MonoBehaviour
     bool tocando_suelo = false;
     public string SceneName;
 
+    bool tocando_pared;
+    bool deslizar_pared;
+    public float velocidadDeslizar;
+
+    bool saltando_pared;
+    public float x_fuerza_pared;
+    public float y_fuerza_pared;
+    public float tiempo_pared;
+
+
     public GameObject cortinaInicio;
     public GameObject cortinaMuerte;
     public GameObject cortinaFinal;
@@ -103,8 +113,36 @@ public class PlayerController : MonoBehaviour
             jump.PlayOneShot(jump.clip);
         }
 
-        //Comprobación HUD
+        //Salto pared
+        if (Input.GetKeyDown("space") && tocando_pared == true && cuenta_saltos < 2)
+        {
+            saltando_pared = true;
+            Invoke("SetSaltandoParedFalse", tiempo_pared);
+        }
+        /*if (saltando_pared == true)
+        {
+            //rb2d.AddForce(Vector2.up * impulsoUP, ForceMode2D.Impulse);
+            //rb2d.velocity = new Vector2(x_fuerza_pared * -Input, y_fuerza_pared);
 
+        }*/
+
+        //Deslizarse pared
+        if (tocando_suelo == false && tocando_pared == true && cuenta_saltos < 2)
+        {
+            deslizar_pared = true;
+        }
+        else
+        {
+            deslizar_pared = false;
+        }
+
+        if (deslizar_pared)
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Clamp(rb2d.velocity.y, -velocidadDeslizar, float.MaxValue));
+        }
+
+
+        //Comprobación HUD
         if (desaparecer == true)
         {
             CanvasVidas.SetActive(false);
@@ -122,6 +160,12 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Doble", false);
             cuenta_saltos = 0;
             Salto2 = false;
+        }
+
+        //Pared
+        if (collision.gameObject.tag == "Wall")
+        {
+            tocando_pared = true;
         }
 
         //Sandias
@@ -170,6 +214,12 @@ public class PlayerController : MonoBehaviour
             default:
             break;
         }
+    }
+
+    //Salto pared
+    void SetSaltandoParedFalse()
+    {
+        saltando_pared = false;
     }
 
     //Final de nivel
