@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
             rb2d.AddForce(Vector2.up * impulso2, ForceMode2D.Impulse);
             jump.PlayOneShot(jump.clip);
         }
+
         //Comprobación HUD
         if (desaparecer == true)
         {
