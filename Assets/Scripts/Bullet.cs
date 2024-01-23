@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Suelo")
+        if (collision.gameObject.tag == "Suelo" || collision.gameObject.tag == "Player")
         {
             anim.SetBool("Suelo", true);
             StartCoroutine(EsperaExplosion());
