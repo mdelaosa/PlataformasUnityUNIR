@@ -19,10 +19,9 @@ public class PlayerController : MonoBehaviour
     public string SceneName;
 
     bool tocando_pared;
-    bool deslizar_pared;
-    public float velocidadDeslizar;
-
     bool saltando_pared;
+    bool pared_izquierda;
+    bool pared_derecha;
     public float x_fuerza_pared;
     public float y_fuerza_pared;
     public float tiempo_pared;
@@ -114,31 +113,26 @@ public class PlayerController : MonoBehaviour
         }
 
         //Salto pared
-        if (Input.GetKeyDown("space") && tocando_pared == true && cuenta_saltos < 2)
+        if (tocando_suelo == false && tocando_pared == true)
         {
             saltando_pared = true;
-            Invoke("SetSaltandoParedFalse", tiempo_pared);
-        }
-        /*if (saltando_pared == true)
-        {
-            //rb2d.AddForce(Vector2.up * impulsoUP, ForceMode2D.Impulse);
-            //rb2d.velocity = new Vector2(x_fuerza_pared * -Input, y_fuerza_pared);
-
-        }*/
-
-        //Deslizarse pared
-        if (tocando_suelo == false && tocando_pared == true && cuenta_saltos < 2)
-        {
-            deslizar_pared = true;
-        }
-        else
-        {
-            deslizar_pared = false;
+            //Invoke("SetSaltandoParedFalse", tiempo_pared);
         }
 
-        if (deslizar_pared)
+        if (saltando_pared == true)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, Mathf.Clamp(rb2d.velocity.y, -velocidadDeslizar, float.MaxValue));
+            if (pared_izquierda)
+            {
+                pared_derecha = false;
+                rb2d.AddForce(Vector2.up * x_fuerza_pared, ForceMode2D.Impulse);
+                rb2d.AddForce(Vector2.left * y_fuerza_pared, ForceMode2D.Impulse);
+            }
+            else if (pared_derecha)
+            {
+                pared_izquierda = false;
+                rb2d.AddForce(Vector2.up * x_fuerza_pared, ForceMode2D.Impulse);
+                rb2d.AddForce(Vector2.right * y_fuerza_pared, ForceMode2D.Impulse);
+            }
         }
 
 
@@ -155,6 +149,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Suelo")
         {
             tocando_suelo = true;
+            tocando_pared = false;
             anim.SetBool("Grounded", true);
             anim.SetBool("Dañado", false);
             anim.SetBool("Doble", false);
@@ -163,9 +158,17 @@ public class PlayerController : MonoBehaviour
         }
 
         //Pared
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "IPared")
         {
             tocando_pared = true;
+            pared_izquierda = true;
+            pared_derecha = false;
+        }
+        if (collision.gameObject.tag == "DPared")
+        {
+            tocando_pared = true;
+            pared_izquierda = false;
+            pared_derecha = true;
         }
 
         //Sandias
@@ -217,10 +220,10 @@ public class PlayerController : MonoBehaviour
     }
 
     //Salto pared
-    void SetSaltandoParedFalse()
+    /*void SetSaltandoParedFalse()
     {
         saltando_pared = false;
-    }
+    }*/
 
     //Final de nivel
     private void OnTriggerEnter2D(Collider2D collision)
