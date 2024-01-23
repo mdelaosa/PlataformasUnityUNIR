@@ -119,23 +119,6 @@ public class PlayerController : MonoBehaviour
             //Invoke("SetSaltandoParedFalse", tiempo_pared);
         }
 
-        if (saltando_pared == true)
-        {
-            if (pared_izquierda)
-            {
-                pared_derecha = false;
-                rb2d.AddForce(Vector2.up * x_fuerza_pared, ForceMode2D.Impulse);
-                rb2d.AddForce(Vector2.left * y_fuerza_pared, ForceMode2D.Impulse);
-            }
-            else if (pared_derecha)
-            {
-                pared_izquierda = false;
-                rb2d.AddForce(Vector2.up * x_fuerza_pared, ForceMode2D.Impulse);
-                rb2d.AddForce(Vector2.right * y_fuerza_pared, ForceMode2D.Impulse);
-            }
-        }
-
-
         //Comprobación HUD
         if (desaparecer == true)
         {
@@ -163,12 +146,24 @@ public class PlayerController : MonoBehaviour
             tocando_pared = true;
             pared_izquierda = true;
             pared_derecha = false;
+            if (tocando_suelo == false)
+            {
+                rb2d.AddForce(Vector2.up * y_fuerza_pared, ForceMode2D.Impulse);
+                rb2d.AddForce(Vector2.left * x_fuerza_pared, ForceMode2D.Impulse);
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
         }
         if (collision.gameObject.tag == "DPared")
         {
             tocando_pared = true;
             pared_izquierda = false;
             pared_derecha = true;
+            if (tocando_suelo == false)
+            {
+                rb2d.AddForce(Vector2.up * y_fuerza_pared, ForceMode2D.Impulse);
+                rb2d.AddForce(Vector2.right * x_fuerza_pared, ForceMode2D.Impulse);
+                transform.localScale = new Vector3(1f, 1f, 1f);
+            }
         }
 
         //Sandias
@@ -225,6 +220,14 @@ public class PlayerController : MonoBehaviour
     {
         saltando_pared = false;
     }*/
+    //Rotar
+    private void RotateAnimation()
+    {
+        if (Input.GetAxis("Horizontal") > 0.01f)
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        else if (Input.GetAxis("Horizontal") < -0.01f)
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+    }
 
     //Final de nivel
     private void OnTriggerEnter2D(Collider2D collision)
