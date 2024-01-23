@@ -11,6 +11,7 @@ TagManager:
   - Bandera
   - IPared
   - DPared
+  - Trigger
   layers:
   - Default
   - TransparentFX
