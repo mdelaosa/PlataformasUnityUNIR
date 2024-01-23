@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Coin
   - Bandera
+  - IPared
+  - DPared
   layers:
   - Default
   - TransparentFX
