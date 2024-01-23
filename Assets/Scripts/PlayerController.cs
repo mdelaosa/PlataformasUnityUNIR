@@ -111,14 +111,6 @@ public class PlayerController : MonoBehaviour
             rb2d.AddForce(Vector2.up * impulso2, ForceMode2D.Impulse);
             jump.PlayOneShot(jump.clip);
         }
-
-        //Salto pared
-        if (tocando_suelo == false && tocando_pared == true)
-        {
-            saltando_pared = true;
-            //Invoke("SetSaltandoParedFalse", tiempo_pared);
-        }
-
         //Comprobación HUD
         if (desaparecer == true)
         {
@@ -213,20 +205,6 @@ public class PlayerController : MonoBehaviour
             default:
             break;
         }
-    }
-
-    //Salto pared
-    /*void SetSaltandoParedFalse()
-    {
-        saltando_pared = false;
-    }*/
-    //Rotar
-    private void RotateAnimation()
-    {
-        if (Input.GetAxis("Horizontal") > 0.01f)
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        else if (Input.GetAxis("Horizontal") < -0.01f)
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
     }
 
     //Final de nivel
