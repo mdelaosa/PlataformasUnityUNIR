@@ -20,7 +20,8 @@ public class Play : MonoBehaviour
     //Elegir nivel aleatorio dependiendo de los niveles pasados
     private void Start()
     {
-        NivelAleatorio = Random.Range(1, 2);
+        NivelAleatorio = Random.Range(1, 6);
+        Debug.Log(NivelAleatorio);
         PlayerController.contador_vidas = 3;
         //CreadordeVidas = 0;
         PlayerController.InicioMusica = 0;

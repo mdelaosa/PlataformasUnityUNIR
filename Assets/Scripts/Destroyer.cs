@@ -17,6 +17,10 @@ public class Destroyer : MonoBehaviour
             Debug.Log("Destruido");
             Destroy(gameObject);
         }
+        if (PlayerController.contador_vidas <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
 }

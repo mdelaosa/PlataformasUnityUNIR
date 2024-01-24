@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public float tiempo_pared;
 
 
+
     public GameObject cortinaInicio;
     public GameObject cortinaMuerte;
     public GameObject cortinaFinal;
@@ -212,9 +213,9 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case 0:
+                Musica.SetActive(false);
                 heart1.SetActive(false);
                 Debug.Log("Muerto");
-                Musica.SetActive(false);
                 cuentaHUD = 0;
                 //GameOver.PlayOneShot(GameOver.clip);
                 cortinaMuerte.SetActive(true);
@@ -234,7 +235,41 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Bandera")
         {
             Bandera.PlayOneShot(Bandera.clip);
-            Play.NivelAleatorio = Random.Range(1, 2);
+
+            //Elección de nuevo nivel aleatorio
+            ++CuentaNiveles;
+            Debug.Log(CuentaNiveles);
+
+            if (CuentaNiveles >= 0 && CuentaNiveles <= 5)
+            {
+                Play.NivelAleatorio = Random.Range(1, 6);
+            }
+            if (CuentaNiveles >= 6 && CuentaNiveles <= 10)
+            {
+                Play.NivelAleatorio = Random.Range(6, 11);
+            }
+            if (CuentaNiveles >= 11 && CuentaNiveles <= 15)
+            {
+                Play.NivelAleatorio = Random.Range(11, 16);
+            }
+            if (CuentaNiveles >= 16 && CuentaNiveles <= 20)
+            {
+                Play.NivelAleatorio = Random.Range(16, 21);
+            }
+            if (CuentaNiveles >= 21 && CuentaNiveles <= 25)
+            {
+                Play.NivelAleatorio = Random.Range(21, 26);
+            }
+            if (CuentaNiveles >= 26 && CuentaNiveles <= 30)
+            {
+                Play.NivelAleatorio = Random.Range(26, 31);
+            }
+            if (CuentaNiveles >= 31)
+            {
+                Play.NivelAleatorio = Random.Range(1, 31);
+            }
+
+            Debug.Log("Nivel: " + CuentaNiveles);
             cortinaFinal.SetActive(true);
             timer.SetActive(false);
             Destroy(CanvasVidas);
@@ -253,14 +288,15 @@ public class PlayerController : MonoBehaviour
     IEnumerator EsperaFinal()
     {
         yield return new WaitForSeconds(0f);
-        ++CuentaNiveles;
-        Debug.Log(CuentaNiveles);
         SceneManager.LoadScene(Play.NivelAleatorio);
     }
     IEnumerator EsperaMuerte()
     {
+        Musica.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         Destroy(CanvasVidas);
+        CuentaNiveles = 0;
+        Musica.SetActive(false);
         SceneManager.LoadScene(SceneName);
 
     }
